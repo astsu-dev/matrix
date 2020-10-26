@@ -6,6 +6,7 @@ authors = ["Madara <None>"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
+termcolor = "^1.1.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
