@@ -1,9 +1,11 @@
-import string
 import random
+import string
 from typing import List, Optional
-from typing_extensions import TypedDict
 
 import termcolor
+from typing_extensions import TypedDict
+
+from .typedefs import TermColor
 
 
 class VLine(TypedDict):
@@ -13,55 +15,36 @@ class VLine(TypedDict):
 
 
 class Matrix:
+    """This class presents matrix"""
+
     def __init__(self, width: int, height: int,
-                 color: str, chars: Optional[List[str]] = None) -> None:
+                 color: TermColor, chars: List[str]) -> None:
         self.width = width
         self.height = height
         self.color = color
         self.min_vline_len = 5
         self.max_vline_len = height // 2
-        self.chars: List[str] = [
-            *string.ascii_letters,
-            *string.digits,
-            *string.punctuation,
-        ] if chars is None else chars
-        # self.matrix = [" " * width for _ in range(height)]
+        self.chars = chars
         self.vlines: List[VLine] = [
-            {"empty": True, "length": 0, "max_length": height} for _ in range(width)]
+            {"empty": True, "length": 0, "max_length": 0} for _ in range(width)]
 
     def gen_new_line(self) -> str:
-        # matrix = self.matrix
-
         line = ""
         for vline in self.vlines:
-            line += self.gen_char_for_vline(vline)
-
-        # self._add_new_line(line)
+            line += self._gen_char_for_vline(vline)
         return line
 
-    def gen_char_for_vline(self, vline: VLine) -> str:
+    def _gen_char_for_vline(self, vline: VLine) -> str:
         vline_len = vline["length"] = vline["length"] + 1
-        if vline_len <= vline["max_length"]:
-            char = " " if vline["empty"] else self._gen_char()
-            return char
-        else:
+        if vline_len > vline["max_length"]:
             vline["empty"] = not vline["empty"]
-            vline["length"] = 0
+            vline["length"] = 1
             vline["max_length"] = random.randint(
                 self.min_vline_len, self.max_vline_len)
-            return self.gen_char_for_vline(vline)
+        char = " " if vline["empty"] else self._gen_char()
+        return char
 
     def _gen_char(self) -> str:
         """Returns random ascii character."""
 
         return termcolor.colored(random.choice(self.chars), self.color)
-
-    # def _add_new_line(self, line) -> None:
-    #     # matrix = self.matrix
-
-    #     matrix.append(line)
-    #     if len(matrix) > self.height:
-    #         self.matrix = matrix[1:]
-
-    # def __str__(self) -> str:
-    #     return "\n".join(self.matrix)

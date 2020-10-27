@@ -4,11 +4,21 @@ from .matrix import Matrix
 
 
 class MatrixPrinter:
-    def __init__(self, matrix: Matrix, delay: float) -> None:
+    """Class for printing matrix"""
+
+    def __init__(self, matrix: Matrix, speed: int) -> None:
+        """
+        Args:
+            matrix (Matrix): Matrix isntance
+            speed (int): lines per second
+        """
+
         self.matrix = matrix
-        self.delay = delay
+        self.delay = 1 / speed
 
     def run(self) -> None:
+        """Runs printing matrix."""
+
         try:
             while True:
                 print(self.matrix.gen_new_line())
