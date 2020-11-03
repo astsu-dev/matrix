@@ -9,7 +9,7 @@ class MatrixPrinter:
     def __init__(self, matrix: Matrix, speed: int) -> None:
         """
         Args:
-            matrix (Matrix): Matrix isntance
+            matrix (Matrix): matrix
             speed (int): lines per second
         """
 
