@@ -4,7 +4,7 @@ from .matrix import Matrix
 
 
 class MatrixPrinter:
-    """Class for printing matrix"""
+    """This class needs for printing matrix."""
 
     def __init__(self, matrix: Matrix, speed: int) -> None:
         """

@@ -1,14 +1,14 @@
 import random
-import string
-from typing import List, Optional
+from typing import List
 
 import termcolor
-from typing_extensions import TypedDict
 
 from .typedefs import TermColor
 
 
 class VLine:
+    """This class represents matrix vertical line."""
+
     def __init__(self, is_empty: bool, length: int, max_length: int) -> None:
         self.is_empty = is_empty
         self.length = length
@@ -16,7 +16,7 @@ class VLine:
 
 
 class Matrix:
-    """This class represents matrix"""
+    """This class represents matrix."""
 
     def __init__(self, width: int, height: int,
                  color: TermColor, chars: List[str]) -> None:
@@ -35,7 +35,7 @@ class Matrix:
         self.min_vline_len = 5
         self.max_vline_len = height // 2
         self.chars = chars
-        self.vlines: List[VLine] = [
+        self.vlines = [
             VLine(is_empty=True, length=0, max_length=0) for _ in range(width)]
 
     def gen_new_line(self) -> str:
