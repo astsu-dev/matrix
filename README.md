@@ -2,7 +2,7 @@
 
 ### Installation
 
-poetry add matrix
+poetry install --no-dev
 
 ### Use
 
